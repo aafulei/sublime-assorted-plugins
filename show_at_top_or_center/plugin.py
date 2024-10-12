@@ -1,5 +1,10 @@
 # 24/10/12 = Sat
 
+# ===== Recenter ==============================================================
+# Adapted from RecenterTopBottom by Matt Burrows
+# https://github.com/mburrows/RecenterTopBottom
+# =============================================================================
+
 import sublime_plugin
 
 g_last_row = dict()
