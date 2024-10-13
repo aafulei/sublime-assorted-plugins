@@ -9,8 +9,8 @@ import sublime_plugin
 
 
 class ShowAtTopOrCenterCommand(sublime_plugin.TextCommand):
-    def run(self, edit, top_margin=5):
-        # top_margin should be > 0
+    def run(self, edit, top_margin=0):
+        # top_margin should be >= 0
         top_margin = max(0, top_margin)
         view = self.view
         # Note: it would be wrong if you wrote -
