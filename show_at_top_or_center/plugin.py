@@ -9,9 +9,11 @@ import sublime_plugin
 
 
 class ShowAtTopOrCenterCommand(sublime_plugin.TextCommand):
-    def run(self, edit, top_margin=0):
-        # top_margin should be >= 0
-        top_margin = max(0, top_margin)
+    def run(self, edit, top_margin=1):
+        # top_margin should be at least 1; if it's 0 and the first line is
+        # partially visible, the command would cause the page to constantly
+        # scroll up instead of jumping between top and center.
+        top_margin = max(1, top_margin)
         view = self.view
         # Note: it would be wrong if you wrote -
         # ------------------
