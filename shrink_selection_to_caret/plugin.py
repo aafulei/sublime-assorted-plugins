@@ -1,7 +1,7 @@
 # 23/02/26 = Sun
 
-# Empty Selection
-# ---------------
+# Shrink Selection to Caret
+# -------------------------
 # based on a forum post by C0D312:
 # https://www.sublimetext.com/forum/viewtopic.php?f=2&t=4716#p21219
 
@@ -58,7 +58,7 @@
 import sublime_plugin
 
 
-class EmptySelectionCommand(sublime_plugin.TextCommand):
+class ShrinkSelectionToCaretCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         # "sublime.Region.b" is always the location of the caret. It may be
         #  less than "sublime.Region.a".
