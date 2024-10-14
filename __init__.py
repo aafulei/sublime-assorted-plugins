@@ -1,6 +1,6 @@
 from .highlight_all_occurences import (
-    HighlightAllOccurencesListener
-    HighlightAllOccurencesToggleCommand,
+    HighlightAllOccurencesListener,
+    HighlightAllOccurencesToggleSettingCommand
 )
 
 from .shrink_selection_to_caret.plugin import ShrinkSelectionToCaretCommand

@@ -66,7 +66,8 @@ class HighlightAllOccurencesListener(sublime_plugin.ViewEventListener):
                          scope=color_scope)
 
 
-class HighlightAllOccurencesToggleCommand(sublime_plugin.ApplicationCommand):
+class HighlightAllOccurencesToggleSettingCommand(
+        sublime_plugin.ApplicationCommand):
     def run(self, **args):
         global g_settings
         if "setting" not in args:
