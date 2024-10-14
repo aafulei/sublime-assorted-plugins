@@ -39,7 +39,7 @@ class HighlightAllOccurencesListener(sublime_plugin.ViewEventListener):
         selections = view.sel()
         regions_to_highlight = []
         for region in selections:
-            # if region is a range, i.e. selection has something in it
+            # if region is a range, i.e. selection has something
             if len(region) > 0:
                 string = view.substr(region)
                 regex = re.escape(string)
