@@ -44,11 +44,10 @@ class HighlightAllOccurencesListener(sublime_plugin.ViewEventListener):
                 string = view.substr(region)
                 regex = re.escape(string)
                 word_region = view.word(region)
-                # The region here might be a leftward selection with a > b:
+                # The region might be a leftward selection with a > b, e.g.
                 #   region=Region(3199, 3192) vs word_region=Region(3192, 3199)
                 if (region.begin() == word_region.begin() and
                         region.end() == word_region.end()):
-                    print(f"{region=} vs {word_region=}")
                     regex = "\\b{}\\b".format(regex)
                 regions_to_highlight.extend(view.find_all(regex))
             # if region is a point, i.e. selection is empty
@@ -69,18 +68,18 @@ class HighlightAllOccurencesToggleSettingCommand(
         sublime_plugin.ApplicationCommand):
     def run(self, **args):
         global g_settings
-        if "setting" not in args:
-            return
-        if args["setting"] not in ("enabled", "instant"):
-            return
         msg = "{} ".format(g_plugin_name)
-        if args["setting"] == "enabled":
+        if ("setting" not in args or
+                args["setting"] not in ("enabled", "instant")):
+            msg += "[{}]".format("Error")
+        elif args["setting"] == "enabled":
             enabled = not g_settings.get(g_enabled_key, g_default_enabled)
             g_settings.set(g_enabled_key, enabled)
             msg += "[{}]".format("Enabled" if enabled else "Disabled")
+            sublime.save_settings(g_settings_filename)
         else:
             instant = not g_settings.get(g_instant_key, g_default_instant)
             g_settings.set(g_instant_key, instant)
             msg += "[{}]".format("Instant" if instant else "On Select")
-        sublime.save_settings(g_settings_filename)
+            sublime.save_settings(g_settings_filename)
         sublime.status_message(msg)
