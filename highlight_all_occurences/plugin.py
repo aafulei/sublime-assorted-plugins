@@ -1,7 +1,7 @@
 # 24/10/14 = Mon
 
 # --- imports -----------------------------------------------------------------
-# standard library
+# standard
 import re
 
 # sublime
@@ -11,7 +11,6 @@ import sublime_plugin
 # --- globals -----------------------------------------------------------------
 g_plugin_name = "Highlight All Occurences"
 g_settings_filename = "HighlightAllOccurences.sublime-settings"
-g_settings = sublime.load_settings(g_settings_filename)
 
 g_default_color_scope = "string"
 g_default_enabled = True
@@ -21,6 +20,8 @@ g_color_scope_key = "color_scope"
 g_enabled_key = "enabled"
 g_instant_key = "instant"
 g_region_key = "highlight_all_occurences"
+
+g_settings = sublime.load_settings(g_settings_filename)
 
 
 # --- internal functions ------------------------------------------------------
