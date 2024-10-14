@@ -46,10 +46,8 @@ class HighlightAllOccurencesListener(sublime_plugin.ViewEventListener):
                 word_region = view.word(region)
                 # The region here might be a leftward selection with a > b:
                 #   region=Region(3199, 3192) vs word_region=Region(3192, 3199)
-                # We could normalize it, similar to taking the absolute value
-                # of a negative number. However, a simpler approach is to
-                # compare the lengths.
-                if len(region) == len(word_region):
+                if (region.begin() == word_region.begin() and
+                        region.end() == word_region.end()):
                     print(f"{region=} vs {word_region=}")
                     regex = "\\b{}\\b".format(regex)
                 regions_to_highlight.extend(view.find_all(regex))
