@@ -28,12 +28,6 @@ def is_valid_identifier(string):
     return bool(re.match(pattern, string))
 
 
-# --- public functions --------------------------------------------------------
-def plugin_loaded():
-    global g_settings
-    g_settings = sublime.load_settings(g_settings_filename)
-
-
 # --- commands ----------------------------------------------------------------
 class HighlightAllOccurencesListener(sublime_plugin.ViewEventListener):
     def on_selection_modified_async(self):
@@ -72,6 +66,8 @@ class HighlightAllOccurencesToggleSettingCommand(
         global g_settings
         if "setting" not in args:
             return
+        if not settings:
+            g_settings = sublime.load_settings(g_settings_filename)
         if args["setting"] == "enabled":
             enabled = g_settings.get(g_enabled_key, g_default_enabled)
             g_settings.set(g_enabled_key, not enabled)
