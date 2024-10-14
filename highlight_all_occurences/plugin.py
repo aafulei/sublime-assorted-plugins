@@ -10,7 +10,7 @@ import sublime_plugin
 
 # --- globals -----------------------------------------------------------------
 g_settings_filename = "HighlightAllOccurences.sublime-settings"
-g_settings = None
+g_settings = sublime.load_settings(g_settings_filename)
 
 g_default_color_scope = "string"
 g_default_enabled = True
@@ -63,11 +63,9 @@ class HighlightAllOccurencesListener(sublime_plugin.ViewEventListener):
 class HighlightAllOccurencesToggleSettingCommand(
         sublime_plugin.ApplicationCommand):
     def run(self, **args):
-        global g_settings
         if "setting" not in args:
             return
-        if not settings:
-            g_settings = sublime.load_settings(g_settings_filename)
+        global g_settings
         if args["setting"] == "enabled":
             enabled = g_settings.get(g_enabled_key, g_default_enabled)
             g_settings.set(g_enabled_key, not enabled)
