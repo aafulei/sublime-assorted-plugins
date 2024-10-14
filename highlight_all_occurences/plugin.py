@@ -75,11 +75,11 @@ class HighlightAllOccurencesToggleSettingCommand(
         elif args["setting"] == "enabled":
             enabled = not g_settings.get(g_enabled_key, g_default_enabled)
             g_settings.set(g_enabled_key, enabled)
-            msg += "[{}]".format("Enabled" if enabled else "Disabled")
             sublime.save_settings(g_settings_filename)
+            msg += "[{}]".format("Enabled" if enabled else "Disabled")
         else:
             instant = not g_settings.get(g_instant_key, g_default_instant)
             g_settings.set(g_instant_key, instant)
-            msg += "[{}]".format("Instant" if instant else "On Select")
             sublime.save_settings(g_settings_filename)
+            msg += "[{}]".format("Instant" if instant else "On Select")
         sublime.status_message(msg)
