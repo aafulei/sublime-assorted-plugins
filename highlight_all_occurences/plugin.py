@@ -9,6 +9,7 @@ import sublime
 import sublime_plugin
 
 # --- globals -----------------------------------------------------------------
+g_plugin_name = "Highlight All Occurences"
 g_settings_filename = "HighlightAllOccurences.sublime-settings"
 g_settings = sublime.load_settings(g_settings_filename)
 
@@ -43,7 +44,13 @@ class HighlightAllOccurencesListener(sublime_plugin.ViewEventListener):
                 string = view.substr(region)
                 regex = re.escape(string)
                 word_region = view.word(region)
-                if region == word_region:
+                # The region here might be a leftward selection with a > b:
+                #   region=Region(3199, 3192) vs word_region=Region(3192, 3199)
+                # We could normalize it, similar to taking the absolute value
+                # of a negative number. However, a simpler approach is to
+                # compare the lengths.
+                if len(region) == len(word_region):
+                    print(f"{region=} vs {word_region=}")
                     regex = "\\b{}\\b".format(regex)
                 regions_to_highlight.extend(view.find_all(regex))
             # if region is a point, i.e. selection is empty
@@ -63,14 +70,19 @@ class HighlightAllOccurencesListener(sublime_plugin.ViewEventListener):
 class HighlightAllOccurencesToggleSettingCommand(
         sublime_plugin.ApplicationCommand):
     def run(self, **args):
+        global g_settings
         if "setting" not in args:
             return
-        global g_settings
+        if args["setting"] not in ("enabled", "instant"):
+            return
+        msg = "{} ".format(g_plugin_name)
         if args["setting"] == "enabled":
-            enabled = g_settings.get(g_enabled_key, g_default_enabled)
-            g_settings.set(g_enabled_key, not enabled)
-            sublime.save_settings(g_settings_filename)
-        elif args["setting"] == "instant":
-            instant = g_settings.get(g_instant_key, g_default_instant)
-            g_settings.set(g_instant_key, not instant)
-            sublime.save_settings(g_settings_filename)
+            enabled = not g_settings.get(g_enabled_key, g_default_enabled)
+            g_settings.set(g_enabled_key, enabled)
+            msg += "[{}]".format("Enabled" if enabled else "Disabled")
+        else:
+            instant = not g_settings.get(g_instant_key, g_default_instant)
+            g_settings.set(g_instant_key, instant)
+            msg += "[{}]".format("Instant" if instant else "On Select")
+        sublime.save_settings(g_settings_filename)
+        sublime.status_message(msg)
