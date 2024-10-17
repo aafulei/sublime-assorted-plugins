@@ -32,7 +32,9 @@ def is_valid_identifier(string):
 
 # --- commands ----------------------------------------------------------------
 class HighlightAllOccurencesListener(sublime_plugin.ViewEventListener):
-    def on_selection_modified_async(self):
+    def on_selection_modified(self):
+        # don't do async (i.e. on_selection_modified_async) as it might cause
+        # selections to flash
         view = self.view
         view.erase_regions(key=g_region_key)
         if not g_settings.get(key=g_enabled_key, default=g_default_enabled):
