@@ -1,5 +1,7 @@
 # 24/10/14 = Mon
 
+# todo: multiple groups (panes)
+
 # --- imports -----------------------------------------------------------------
 # standard
 import re
