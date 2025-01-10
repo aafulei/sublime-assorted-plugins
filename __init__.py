@@ -7,3 +7,5 @@ from .show_git_blame_in_status_bar.plugin import (
     ShowGitBlameInStatusBarListener)
 
 from .shrink_selection_to_caret.plugin import ShrinkSelectionToCaretCommand
+
+from .toggle_word.plugin import ToggleWordCommand
