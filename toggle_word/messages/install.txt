@@ -1,0 +1,38 @@
+Toggle Words
+============
+A Sublime Text plugin for toggling and cycling through words.
+
+This plugin allows users to switch between predefined words or cycle through
+a list of words using keyboard shortcuts. For example,
+
+- Toggle between "True" and "False".
+- Cycle through "Red", "Blue", and "Green".
+
+The word list is customizable via the settings file, allowing users to define
+their own words for toggling or cycling through. The default word list includes
+variations of "True" and "False".
+
+How to Use
+----------
+1. Define Key Bindings
+
+This plugin does not come with default key bindings. Please define your own for the command toggle_word.
+
+- Recommended Key Bindings
+    - macOS: cmd + K, cmd + \
+    - Windows: ctrl + K, ctrl + \
+    - Linux: ctrl + K, ctrl + \
+
+The command toggle_word is also accessible via the Command Palette (Toggle Word) or the Main Menu (Edit > Toggle Word).
+
+2. Define Word List
+
+The list of words to toggle or cycle through can be customized in ToggleWords.sublime-settings.
+
+Author
+------
+Aaron Fu Lei
+
+License
+-------
+MIT

@@ -1,0 +1,6 @@
+[
+    {
+        "command": "toggle_word",
+        "caption": "Toggle Word"
+    }
+]

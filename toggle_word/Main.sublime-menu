@@ -1,0 +1,59 @@
+[
+    {
+        "id": "edit",
+        "children":
+        [
+            {
+                "caption": "Toggle Word",
+                "command": "toggle_word"
+            }
+        ]
+    },
+    {
+        "id": "preferences",
+        "children":
+        [
+            {
+                // include this information in case it is the only package
+                "caption": "Package Settings",
+                "mnemonic": "P",
+                "id": "package-settings",
+                "children":
+                [
+                    {
+                        "caption": "Toggle Words",
+                        "children":
+                        [
+                            {
+                                "caption": "Settings",
+                                "command": "edit_settings",
+                                "args": {
+                                    "base_file": "${packages}/sublime-toggle-words/ToggleWords.sublime-settings",
+                                    "user_file": "${packages}/User/ToggleWords.sublime-settings",
+                                    "default": "{\n\t$0\n}\n",
+                                }
+                            },
+                            {
+                                "caption": "Key Bindings",
+                                "command": "edit_settings",
+                                "args": {
+                                    "base_file": "${packages}/sublime-toggle-words/Default.sublime-keymap",
+                                    "user_file": "${packages}/User/Default (${platform}).sublime-keymap",
+                                    "default": "[\n\t$0\n]\n",
+                                }
+                            },
+                            { "caption": "-" },
+                            {
+                                "caption": "README",
+                                "command": "open_file",
+                                "args": {
+                                    "file": "${packages}/sublime-toggle-words/messages/install.txt"
+                                }
+                            },
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]
