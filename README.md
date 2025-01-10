@@ -1,4 +1,3 @@
-# Adapted (Sublime Text) Plugins
+# Sublime Assorted Plugins
 
-Sublime Text plugins that I adapted for own use.
-
+An assorted collection of Sublime Text plugins. Some of them I adapted from others. Some of them I wrote.
